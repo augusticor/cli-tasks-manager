@@ -60,7 +60,27 @@ const pauseMenu = async () => {
 	]);
 };
 
+const readUserInput = async (messageToShow) => {
+	const question = [
+		{
+			type: 'input',
+			name: 'userInput',
+			message: messageToShow.yellow + '\n - ',
+			validate: function (input) {
+				if (input.length === 0) {
+					return `${'Please write a task description !!'.red}`;
+				}
+				return true;
+			},
+		},
+	];
+
+	const { userInput } = await inquirer.prompt(question);
+	return userInput;
+};
+
 module.exports = {
 	inquirerMenu,
 	pauseMenu,
+	readUserInput,
 };
