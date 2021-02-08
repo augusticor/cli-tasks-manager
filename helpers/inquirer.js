@@ -9,31 +9,31 @@ const menuOptions = [
 		message: 'Select an option',
 		choices: [
 			{
-				name: 'Create a task',
+				name: `${'1.'.yellow} Create a task`,
 				value: 1,
 			},
 			{
-				name: 'List all tasks',
+				name: `${'2.'.yellow} List all tasks`,
 				value: 2,
 			},
 			{
-				name: 'List completed tasks',
+				name: `${'3.'.yellow} List completed tasks`,
 				value: 3,
 			},
 			{
-				name: 'List pending tasks',
+				name: `${'4.'.yellow} List pending tasks`,
 				value: 4,
 			},
 			{
-				name: 'Complete task(s)',
+				name: `${'5.'.yellow} Complete task(s)`,
 				value: 5,
 			},
 			{
-				name: 'Delete task(s)',
+				name: `${'6.'.yellow} Delete task(s)`,
 				value: 6,
 			},
 			{
-				name: 'Exit',
+				name: `${'0.'.yellow} Exit`,
 				value: 0,
 			},
 		],

@@ -2,16 +2,25 @@ const Task = require('./task');
 
 class TaskManager {
 	constructor() {
-		this._listado = {};
+		this._list = {};
 	}
 
 	createTask(desc) {
 		const task = new Task(desc);
 
-		this._listado[task.id] = task;
+		this._list[task.id] = task;
 	}
 
-	listAllTasks() {}
+	get getListOfAllTasks() {
+		const arrayListOfTasks = [];
+
+		Object.keys(this._list).forEach((uuidkey) => {
+			const eachTask = this._list[uuidkey];
+			arrayListOfTasks.push(eachTask);
+		});
+
+		return arrayListOfTasks;
+	}
 }
 
 module.exports = TaskManager;

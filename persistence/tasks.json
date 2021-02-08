@@ -1,0 +1,37 @@
+[
+    {
+        "id": "d6bccead-6bdd-40f0-ae2c-fabf8a6a8bfa",
+        "desc": "read",
+        "achievedIn": null
+    },
+    {
+        "id": "febc3e12-1be8-4f53-8cac-6ba7757b5ed1",
+        "desc": "Learn something",
+        "achievedIn": null
+    },
+    {
+        "id": "46b345f2-a2e0-4b71-9f61-8c736d0faf88",
+        "desc": "Meditate",
+        "achievedIn": null
+    },
+    {
+        "id": "d3d7e599-3ce5-4e05-a7bc-b2ce7d8f461c",
+        "desc": "Clean",
+        "achievedIn": null
+    },
+    {
+        "id": "e6ae4af1-b4a4-4697-b8bd-d46139df814a",
+        "desc": "Write",
+        "achievedIn": null
+    },
+    {
+        "id": "838f48df-7ee4-4019-8661-677bf8535f4f",
+        "desc": "Exercise",
+        "achievedIn": null
+    },
+    {
+        "id": "f88a89fa-89cf-4edc-a7a8-7631df7d12f4",
+        "desc": "Programming",
+        "achievedIn": null
+    }
+]

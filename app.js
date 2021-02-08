@@ -4,6 +4,7 @@ require('colors');
 const { inquirerMenu, pauseMenu, readUserInput } = require('./helpers/inquirer');
 const Task = require('./models/task');
 const TaskManager = require('./models/task-manager');
+const { saveOnFile } = require('./persistence/persistence');
 
 console.clear();
 
@@ -18,9 +19,11 @@ const main = async () => {
 			case 1:
 				const description = await readUserInput('Write the new task description');
 				taskManager.createTask(description);
+
+				saveOnFile(taskManager.getListOfAllTasks);
 				break;
 			case 2:
-				console.log(taskManager._listado);
+				console.log(taskManager._list);
 				break;
 			case 3:
 				break;
