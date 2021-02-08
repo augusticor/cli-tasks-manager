@@ -4,13 +4,18 @@ require('colors');
 const { inquirerMenu, pauseMenu, readUserInput } = require('./helpers/inquirer');
 const Task = require('./models/task');
 const TaskManager = require('./models/task-manager');
-const { saveOnFile } = require('./persistence/persistence');
+const { saveOnFile, readFromFile } = require('./persistence/persistence');
 
 console.clear();
 
 const main = async () => {
 	let opt = 0;
 	const taskManager = new TaskManager();
+
+	const readFile = readFromFile();
+	if (readFile) {
+		taskManager.loadTasksFromArray(readFile);
+	}
 
 	do {
 		opt = await inquirerMenu();

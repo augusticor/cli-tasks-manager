@@ -11,6 +11,12 @@ class TaskManager {
 		this._list[task.id] = task;
 	}
 
+	loadTasksFromArray(tasks) {
+		for (const task of tasks) {
+			this._list[task.id] = task;
+		}
+	}
+
 	get getListOfAllTasks() {
 		const arrayListOfTasks = [];
 
