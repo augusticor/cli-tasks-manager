@@ -31,6 +31,10 @@ const main = async () => {
 				taskManager.printStylizedTasks2();
 				break;
 			case 3:
+				taskManager.printArrayOfTasks(taskManager.listsTasksByStatus(true));
+				break;
+			case 4:
+				taskManager.printArrayOfTasks(taskManager.listsTasksByStatus(false));
 				break;
 		}
 

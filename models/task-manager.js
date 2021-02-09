@@ -41,6 +41,13 @@ class TaskManager {
 		});
 	}
 
+	/**
+	 * Using the aux method: printArrayOfTasks
+	 */
+	printStylizedTasks3() {
+		this.printArrayOfTasks(this.getListOfAllTasks);
+	}
+
 	loadTasksFromArray(tasks) {
 		for (const task of tasks) {
 			this._list[task.id] = task;
@@ -56,6 +63,33 @@ class TaskManager {
 		});
 
 		return arrayListOfTasks;
+	}
+
+	/**
+	 * List the tasks that meet the given completed status
+	 * @param { boolean } status of the tasks whether completed or not
+	 */
+	listsTasksByStatus(status) {
+		if (status) {
+			return this.getListOfAllTasks.filter((task) => task.achievedIn);
+		}
+		return this.getListOfAllTasks.filter((task) => !task.achievedIn);
+	}
+
+	/**
+	 * Prints on cli the tasks of an array
+	 * @param { Array } arrayOfTasks the array to show
+	 */
+	printArrayOfTasks(arrayOfTasks) {
+		console.log();
+		arrayOfTasks.forEach((task, i) => {
+			const taskIndex = `${i + 1}.`.yellow;
+			const { desc, achievedIn } = task;
+
+			const taskStatus = achievedIn ? `Completed on ${task.achievedIn}`.green : 'Incomplete'.red;
+
+			console.log(`${taskIndex} ${desc} \t ${taskStatus}`);
+		});
 	}
 }
 
