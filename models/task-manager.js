@@ -11,6 +11,36 @@ class TaskManager {
 		this._list[task.id] = task;
 	}
 
+	printStylizedTasks() {
+		//This returns the list of uuids
+		const taskListOnArrayMode = Object.keys(this._list);
+
+		console.log();
+		let isAchievedYet = 'Incomplete';
+
+		for (let i = 0; i < taskListOnArrayMode.length; i++) {
+			const eachTask = this._list[taskListOnArrayMode[i]];
+
+			isAchievedYet = eachTask.achievedIn !== null ? 'Complete'.green : 'Incomplete'.red;
+			console.log(`${`${i}.`.yellow} ${eachTask.desc} \t ${isAchievedYet}\n`);
+		}
+	}
+
+	/**
+	 * Optimized method
+	 */
+	printStylizedTasks2() {
+		console.log();
+		this.getListOfAllTasks.forEach((task, i) => {
+			const taskIndex = `${i + 1}.`.yellow;
+			const { desc, achievedIn } = task;
+
+			const taskStatus = achievedIn ? 'Complete'.green : 'Incomplete'.red;
+
+			console.log(`${taskIndex} ${desc} \t ${taskStatus}`);
+		});
+	}
+
 	loadTasksFromArray(tasks) {
 		for (const task of tasks) {
 			this._list[task.id] = task;

@@ -28,7 +28,7 @@ const main = async () => {
 				saveOnFile(taskManager.getListOfAllTasks);
 				break;
 			case 2:
-				console.log(taskManager._list);
+				taskManager.printStylizedTasks2();
 				break;
 			case 3:
 				break;
