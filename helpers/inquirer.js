@@ -79,8 +79,36 @@ const readUserInput = async (messageToShow) => {
 	return userInput;
 };
 
+const showListOfTasksToDelete = async (tasksToShow = []) => {
+	const choices = tasksToShow.map((eachTask, index) => {
+		//Destructuring each task
+		const { id, desc } = eachTask;
+
+		const indexi = `${index + 1}.`.yellow;
+
+		return {
+			value: id,
+			name: `${indexi} ${desc}`,
+		};
+	});
+
+	const question = [
+		{
+			type: 'list',
+			name: 'selectedQuestion',
+			message: 'Select tasks to delete',
+			choices,
+		},
+	];
+
+	const { selectedQuestion } = await inquirer.prompt(question);
+
+	return selectedQuestion;
+};
+
 module.exports = {
 	inquirerMenu,
 	pauseMenu,
 	readUserInput,
+	showListOfTasksToDelete,
 };

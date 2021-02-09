@@ -1,7 +1,7 @@
 //Recomendado importar primero las importaciones de terceros
 require('colors');
 
-const { inquirerMenu, pauseMenu, readUserInput } = require('./helpers/inquirer');
+const { inquirerMenu, pauseMenu, readUserInput, showListOfTasksToDelete } = require('./helpers/inquirer');
 const Task = require('./models/task');
 const TaskManager = require('./models/task-manager');
 const { saveOnFile, readFromFile } = require('./persistence/persistence');
@@ -35,6 +35,13 @@ const main = async () => {
 				break;
 			case 4:
 				taskManager.printArrayOfTasks(taskManager.listsTasksByStatus(false));
+				break;
+			case 5:
+				//mark as completed tasks
+				break;
+			case 6:
+				const id = await showListOfTasksToDelete(taskManager.getListOfAllTasks);
+				console.log(id);
 				break;
 		}
 

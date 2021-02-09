@@ -76,6 +76,12 @@ class TaskManager {
 		return this.getListOfAllTasks.filter((task) => !task.achievedIn);
 	}
 
+	deleteTasks(id = '') {
+		if (this._list[id]) {
+			delete this._list[id];
+		}
+	}
+
 	/**
 	 * Prints on cli the tasks of an array
 	 * @param { Array } arrayOfTasks the array to show
