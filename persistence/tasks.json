@@ -5,11 +5,6 @@
         "achievedIn": null
     },
     {
-        "id": "febc3e12-1be8-4f53-8cac-6ba7757b5ed1",
-        "desc": "Learn something",
-        "achievedIn": "08-02-2021-13:00"
-    },
-    {
         "id": "46b345f2-a2e0-4b71-9f61-8c736d0faf88",
         "desc": "Meditate",
         "achievedIn": null
@@ -20,24 +15,9 @@
         "achievedIn": null
     },
     {
-        "id": "e6ae4af1-b4a4-4697-b8bd-d46139df814a",
-        "desc": "Write",
-        "achievedIn": null
-    },
-    {
         "id": "838f48df-7ee4-4019-8661-677bf8535f4f",
         "desc": "Exercise",
-        "achievedIn": null
-    },
-    {
-        "id": "f88a89fa-89cf-4edc-a7a8-7631df7d12f4",
-        "desc": "Programming",
-        "achievedIn": "09-02-2021-09:30"
-    },
-    {
-        "id": "24f82aab-bb23-46ee-8b9e-85b5997b9c1a",
-        "desc": "Finish class number 56 of node course",
-        "achievedIn": "08-02-2021-18:20"
+        "achievedIn": "2021-02-10T14:52:53.034Z"
     },
     {
         "id": "0e2b86db-7a14-4eef-a5ab-1cd35e1330c6",
@@ -47,11 +27,6 @@
     {
         "id": "10848edd-bfdc-404e-b4d6-3f9484667129",
         "desc": "Rest",
-        "achievedIn": null
-    },
-    {
-        "id": "c826ac8d-1ca9-463f-a771-88de1e7a7236",
-        "desc": "Divide and win",
-        "achievedIn": null
+        "achievedIn": "2021-02-10T14:52:53.034Z"
     }
 ]

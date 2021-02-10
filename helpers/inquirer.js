@@ -125,10 +125,37 @@ const confirmMessage = async (message) => {
 	return confirmation;
 };
 
+const showListOfPendingTasks = async (pendingTasks = []) => {
+	console.log();
+	const choices = pendingTasks.map((pendTask, index) => {
+		const { id, desc: description } = pendTask;
+
+		const indexi = `${index + 1}.`.yellow;
+
+		return {
+			value: id,
+			name: `${indexi} ${description}`,
+		};
+	});
+
+	const questions = [
+		{
+			type: 'checkbox',
+			name: 'selectedTasks',
+			message: 'Select tasks to mark as complete',
+			choices,
+		},
+	];
+
+	const { selectedTasks } = await inquirer.prompt(questions);
+	return selectedTasks;
+};
+
 module.exports = {
 	inquirerMenu,
 	pauseMenu,
 	readUserInput,
 	showListOfTasksToDelete,
 	confirmMessage,
+	showListOfPendingTasks,
 };

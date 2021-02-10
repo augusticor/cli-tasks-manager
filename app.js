@@ -1,7 +1,7 @@
 //Recomendado importar primero las importaciones de terceros
 require('colors');
 
-const { inquirerMenu, pauseMenu, readUserInput, showListOfTasksToDelete, confirmMessage } = require('./helpers/inquirer');
+const { inquirerMenu, pauseMenu, readUserInput, showListOfTasksToDelete, confirmMessage, showListOfPendingTasks } = require('./helpers/inquirer');
 const Task = require('./models/task');
 const TaskManager = require('./models/task-manager');
 const { saveOnFile, readFromFile } = require('./persistence/persistence');
@@ -36,7 +36,9 @@ const main = async () => {
 				taskManager.printArrayOfTasks(taskManager.listsTasksByStatus(false));
 				break;
 			case 5:
-				//mark as completed tasks
+				const selectedTasks = await showListOfPendingTasks(taskManager.listsTasksByStatus(false));
+				taskManager.completeTasks(selectedTasks);
+				saveOnFile(taskManager.getListOfAllTasks);
 				break;
 			case 6:
 				const id = await showListOfTasksToDelete(taskManager.getListOfAllTasks);
@@ -49,6 +51,7 @@ const main = async () => {
 					taskManager.deleteTasks(id);
 					console.log(`${task.desc}\nhas been deleted`.red);
 				}
+				saveOnFile(taskManager.getListOfAllTasks);
 				break;
 		}
 

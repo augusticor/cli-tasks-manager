@@ -95,6 +95,16 @@ class TaskManager {
 	}
 
 	/**
+	 * Marks as complete the selected tasks from the user
+	 * @param { Array } selectedTasksIDS
+	 */
+	completeTasks(selectedTasksIDS = []) {
+		selectedTasksIDS.forEach((taskID) => {
+			this._list[taskID].achievedIn = new Date().toISOString();
+		});
+	}
+
+	/**
 	 * Prints on cli the tasks of an array
 	 * @param { Array } arrayOfTasks the array to show
 	 */
