@@ -92,18 +92,37 @@ const showListOfTasksToDelete = async (tasksToShow = []) => {
 		};
 	});
 
+	choices.unshift({
+		value: 0,
+		name: '0 to cancel'.yellow,
+	});
+
 	const question = [
 		{
 			type: 'list',
-			name: 'selectedQuestion',
+			name: 'selectedTaskID',
 			message: 'Select tasks to delete',
 			choices,
 		},
 	];
 
-	const { selectedQuestion } = await inquirer.prompt(question);
+	const { selectedTaskID } = await inquirer.prompt(question);
 
-	return selectedQuestion;
+	return selectedTaskID;
+};
+
+const confirmMessage = async (message) => {
+	const question = [
+		{
+			type: 'confirm',
+			name: 'confirmation',
+			message,
+			default: true,
+		},
+	];
+
+	const { confirmation } = await inquirer.prompt(question);
+	return confirmation;
 };
 
 module.exports = {
@@ -111,4 +130,5 @@ module.exports = {
 	pauseMenu,
 	readUserInput,
 	showListOfTasksToDelete,
+	confirmMessage,
 };

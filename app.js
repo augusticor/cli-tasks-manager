@@ -1,7 +1,7 @@
 //Recomendado importar primero las importaciones de terceros
 require('colors');
 
-const { inquirerMenu, pauseMenu, readUserInput, showListOfTasksToDelete } = require('./helpers/inquirer');
+const { inquirerMenu, pauseMenu, readUserInput, showListOfTasksToDelete, confirmMessage } = require('./helpers/inquirer');
 const Task = require('./models/task');
 const TaskManager = require('./models/task-manager');
 const { saveOnFile, readFromFile } = require('./persistence/persistence');
@@ -24,7 +24,6 @@ const main = async () => {
 			case 1:
 				const description = await readUserInput('Write the new task description');
 				taskManager.createTask(description);
-
 				saveOnFile(taskManager.getListOfAllTasks);
 				break;
 			case 2:
@@ -41,7 +40,15 @@ const main = async () => {
 				break;
 			case 6:
 				const id = await showListOfTasksToDelete(taskManager.getListOfAllTasks);
-				console.log(id);
+				if (id === 0) {
+					break;
+				}
+				const task = await taskManager.searchTaskByID(id);
+				const confirmation = await confirmMessage('Are you sure ?');
+				if (confirmation) {
+					taskManager.deleteTasks(id);
+					console.log(`${task.desc}\nhas been deleted`.red);
+				}
 				break;
 		}
 

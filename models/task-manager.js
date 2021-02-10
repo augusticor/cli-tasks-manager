@@ -76,10 +76,22 @@ class TaskManager {
 		return this.getListOfAllTasks.filter((task) => !task.achievedIn);
 	}
 
-	deleteTasks(id = '') {
+	/**
+	 * Deletes a task from _list
+	 * @param { String } id
+	 */
+	deleteTasks(id) {
 		if (this._list[id]) {
 			delete this._list[id];
 		}
+	}
+
+	/**
+	 * Searches the specified task by ID
+	 * @param { String } id
+	 */
+	searchTaskByID(id = '') {
+		return this.getListOfAllTasks.find((task) => task.id === id);
 	}
 
 	/**
