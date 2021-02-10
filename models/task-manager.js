@@ -5,12 +5,19 @@ class TaskManager {
 		this._list = {};
 	}
 
+	/**
+	 * Creates a task to do
+	 * @param { String } desc description of the task
+	 */
 	createTask(desc) {
 		const task = new Task(desc);
 
 		this._list[task.id] = task;
 	}
 
+	/**
+	 * Prints on terminal the tasks and shows if they are done or not
+	 */
 	printStylizedTasks() {
 		//This returns the list of uuids
 		const taskListOnArrayMode = Object.keys(this._list);
@@ -27,7 +34,7 @@ class TaskManager {
 	}
 
 	/**
-	 * Optimized method
+	 * Optimized method of printStylizedTasks
 	 */
 	printStylizedTasks2() {
 		console.log();
@@ -48,12 +55,19 @@ class TaskManager {
 		this.printArrayOfTasks(this.getListOfAllTasks);
 	}
 
+	/**
+	 * Creates the tasks that were on persistence on memory
+	 * @param { Array } tasks of tasks objects from @class { Task }
+	 */
 	loadTasksFromArray(tasks) {
 		for (const task of tasks) {
 			this._list[task.id] = task;
 		}
 	}
 
+	/**
+	 * Returns all the tasks objects inside _list attribute
+	 */
 	get getListOfAllTasks() {
 		const arrayListOfTasks = [];
 
@@ -114,10 +128,26 @@ class TaskManager {
 			const taskIndex = `${i + 1}.`.yellow;
 			const { desc, achievedIn } = task;
 
-			const taskStatus = achievedIn ? `Completed on ${task.achievedIn}`.green : 'Incomplete'.red;
+			const taskStatus = achievedIn ? `Completed on ${this.getDateWithFormat(task.achievedIn)}`.green : 'Incomplete'.red;
 
 			console.log(`${taskIndex} ${desc} \t ${taskStatus}`);
 		});
+	}
+
+	/**
+	 * Returns an ISOS Date in string styled format
+	 * mm/dd/yyyy - hh:mm
+	 * @param { String } stringDate a date on string format, ISOS Date
+	 */
+	getDateWithFormat(stringDate) {
+		let date = new Date(stringDate);
+		let day = date.getDate();
+		let month = date.getMonth() + 1;
+		let year = date.getFullYear();
+		let hours = date.getHours();
+		let minutes = date.getMinutes();
+
+		return `${month}/${day}/${year} - ${hours}:${minutes}`;
 	}
 }
 

@@ -21,26 +21,26 @@ const main = async () => {
 		opt = await inquirerMenu();
 
 		switch (opt) {
-			case 1:
+			case 1: // Create a task
 				const description = await readUserInput('Write the new task description');
 				taskManager.createTask(description);
 				saveOnFile(taskManager.getListOfAllTasks);
 				break;
-			case 2:
+			case 2: // List all tasks
 				taskManager.printStylizedTasks2();
 				break;
-			case 3:
+			case 3: // List completed tasks
 				taskManager.printArrayOfTasks(taskManager.listsTasksByStatus(true));
 				break;
-			case 4:
+			case 4: // List pending tasks
 				taskManager.printArrayOfTasks(taskManager.listsTasksByStatus(false));
 				break;
-			case 5:
+			case 5: // Complete task(s)
 				const selectedTasks = await showListOfPendingTasks(taskManager.listsTasksByStatus(false));
 				taskManager.completeTasks(selectedTasks);
 				saveOnFile(taskManager.getListOfAllTasks);
 				break;
-			case 6:
+			case 6: // Delete task
 				const id = await showListOfTasksToDelete(taskManager.getListOfAllTasks);
 				if (id === 0) {
 					break;

@@ -29,7 +29,7 @@ const menuOptions = [
 				value: 5,
 			},
 			{
-				name: `${'6.'.yellow} Delete task(s)`,
+				name: `${'6.'.yellow} Delete a task`,
 				value: 6,
 			},
 			{
@@ -49,6 +49,9 @@ const inquirerMenu = async () => {
 	return selectedOption;
 };
 
+/**
+ * Stops program execution until the user presses ENTER.
+ */
 const pauseMenu = async () => {
 	console.log('\n');
 
@@ -60,6 +63,10 @@ const pauseMenu = async () => {
 	]);
 };
 
+/**
+ * Reads the user input from the terminal
+ * @param { String } messageToShow to the user
+ */
 const readUserInput = async (messageToShow) => {
 	const question = [
 		{
@@ -79,6 +86,10 @@ const readUserInput = async (messageToShow) => {
 	return userInput;
 };
 
+/**
+ * Shows all the tasks as answers for the inquirier menu, to delete them
+ * @param { Array } tasksToShow the array of all the tasks, completed or not
+ */
 const showListOfTasksToDelete = async (tasksToShow = []) => {
 	const choices = tasksToShow.map((eachTask, index) => {
 		//Destructuring each task
@@ -111,6 +122,10 @@ const showListOfTasksToDelete = async (tasksToShow = []) => {
 	return selectedTaskID;
 };
 
+/**
+ * Shows a confirmation message to the user
+ * @param { String } message confirmation message
+ */
 const confirmMessage = async (message) => {
 	const question = [
 		{
@@ -125,6 +140,10 @@ const confirmMessage = async (message) => {
 	return confirmation;
 };
 
+/**
+ * Shows the list of only the pending tasks
+ * @param { Array } pendingTasks
+ */
 const showListOfPendingTasks = async (pendingTasks = []) => {
 	console.log();
 	const choices = pendingTasks.map((pendTask, index) => {
