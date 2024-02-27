@@ -6,11 +6,16 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "augusticor",
-  "license": "ISC",
+  "license": "GPL-3.0-only",
   "dependencies": {
     "inquirer": "9.2.15"
+  },
+  "devDependencies": {
+    "eslint": "8.57.0",
+    "prettier": "3.2.5"
   }
 }

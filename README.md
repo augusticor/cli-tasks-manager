@@ -32,3 +32,10 @@ Lists of dependencies:
 - **inquirer**: 9.2.15
 
 4. Run [app.js](app.js) main file by running `npm start` command in a terminal.
+
+## Contribution
+
+Please make sure you install the development dependencies using `npm install`
+
+- eslint: 8.57.0
+- prettier: 3.2.5

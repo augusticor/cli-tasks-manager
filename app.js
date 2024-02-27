@@ -1,58 +1,69 @@
-import { confirmMessage, inquirerMenu, pauseMenu, readUserInput, showListOfPendingTasks, showListOfTasksToDelete } from './helpers/inquirer.js';
+import {
+  confirmMessage,
+  inquirerMenu,
+  pauseMenu,
+  readUserInput,
+  showListOfPendingTasks,
+  showListOfTasksToDelete,
+} from './helpers/inquirer.js';
 import TaskManager from './models/task-manager.js';
 import { readFromFile, saveOnFile } from './persistence/persistence.js';
 
 console.clear();
 
 const main = async () => {
-	let opt = 0;
-	const taskManager = new TaskManager();
+  let opt = 0;
+  const taskManager = new TaskManager();
 
-	const readFile = readFromFile();
-	if (readFile) {
-		taskManager.loadTasksFromArray(readFile);
-	}
+  const readFile = readFromFile();
+  if (readFile) {
+    taskManager.loadTasksFromArray(readFile);
+  }
 
-	do {
-		opt = await inquirerMenu();
+  do {
+    opt = await inquirerMenu();
 
-		switch (opt) {
-			case 1: // Create a task
-				const description = await readUserInput('Write the new task description');
-				taskManager.createTask(description);
-				saveOnFile(taskManager.getListOfAllTasks);
-				break;
-			case 2: // List all tasks
-				taskManager.printStylizedTasks2();
-				break;
-			case 3: // List completed tasks
-				taskManager.printArrayOfTasks(taskManager.listsTasksByStatus(true));
-				break;
-			case 4: // List pending tasks
-				taskManager.printArrayOfTasks(taskManager.listsTasksByStatus(false));
-				break;
-			case 5: // Complete task(s)
-				const selectedTasks = await showListOfPendingTasks(taskManager.listsTasksByStatus(false));
-				taskManager.completeTasks(selectedTasks);
-				saveOnFile(taskManager.getListOfAllTasks);
-				break;
-			case 6: // Delete task
-				const id = await showListOfTasksToDelete(taskManager.getListOfAllTasks);
-				if (id === 0) {
-					break;
-				}
-				const task = await taskManager.searchTaskByID(id);
-				const confirmation = await confirmMessage('Are you sure ?');
-				if (confirmation) {
-					taskManager.deleteTasks(id);
-					console.log(`${task.desc}\nhas been deleted`.red);
-				}
-				saveOnFile(taskManager.getListOfAllTasks);
-				break;
-		}
+    switch (opt) {
+      case 1: // Create a task
+        const description = await readUserInput('Write the new task description');
+        taskManager.createTask(description);
+        saveOnFile(taskManager.getListOfAllTasks);
+        break;
 
-		await pauseMenu();
-	} while (opt !== 0);
+      case 2: // List all tasks
+        taskManager.printStylizedTasks2();
+        break;
+
+      case 3: // List completed tasks
+        taskManager.printArrayOfTasks(taskManager.listsTasksByStatus(true));
+        break;
+
+      case 4: // List pending tasks
+        taskManager.printArrayOfTasks(taskManager.listsTasksByStatus(false));
+        break;
+
+      case 5: // Complete task(s)
+        const selectedTasks = await showListOfPendingTasks(taskManager.listsTasksByStatus(false));
+        taskManager.completeTasks(selectedTasks);
+        saveOnFile(taskManager.getListOfAllTasks);
+        break;
+
+      case 6: // Delete task
+        const id = await showListOfTasksToDelete(taskManager.getListOfAllTasks);
+        if (id === 0) break;
+
+        const task = await taskManager.searchTaskByID(id);
+        const confirmation = await confirmMessage('Are you sure ?');
+        if (confirmation) {
+          taskManager.deleteTasks(id);
+          console.log(`${task.desc}\nhas been deleted`.red);
+        }
+        saveOnFile(taskManager.getListOfAllTasks);
+        break;
+    }
+
+    await pauseMenu();
+  } while (opt !== 0);
 };
 
 main();

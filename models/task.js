@@ -1,14 +1,14 @@
 import { randomUUID } from 'node:crypto';
 
 class Task {
-	id = '';
-	desc = '';
-	achievedIn = null;
+  id = '';
+  desc = '';
+  achievedIn = null;
 
-	constructor(desc) {
-		this.id = randomUUID();
-		this.desc = desc;
-	}
+  constructor(desc) {
+    this.id = randomUUID();
+    this.desc = desc;
+  }
 }
 
 export default Task;

@@ -2,42 +2,42 @@ import inquirer from 'inquirer';
 import colorizeText from './colors.js';
 
 const menuOptions = [
-	{
-		type: 'list',
-		name: 'selectedOption',
-		default: 0,
-		message: 'Select an option',
-		choices: [
-			{
-				name: `${colorizeText('1.', 'yellow')} Create a task`,
-				value: 1,
-			},
-			{
-				name: `${colorizeText('2.', 'yellow')} List all tasks`,
-				value: 2,
-			},
-			{
-				name: `${colorizeText('3.', 'yellow')} List completed tasks`,
-				value: 3,
-			},
-			{
-				name: `${colorizeText('4.', 'yellow')} List pending tasks`,
-				value: 4,
-			},
-			{
-				name: `${colorizeText('5.', 'yellow')} Complete task(s)`,
-				value: 5,
-			},
-			{
-				name: `${colorizeText('6.', 'yellow')} Delete a task`,
-				value: 6,
-			},
-			{
-				name: `${colorizeText('0.', 'yellow')} Exit`,
-				value: 0,
-			},
-		],
-	},
+  {
+    type: 'list',
+    name: 'selectedOption',
+    default: 0,
+    message: 'Select an option',
+    choices: [
+      {
+        name: `${colorizeText('1.', 'yellow')} Create a task`,
+        value: 1,
+      },
+      {
+        name: `${colorizeText('2.', 'yellow')} List all tasks`,
+        value: 2,
+      },
+      {
+        name: `${colorizeText('3.', 'yellow')} List completed tasks`,
+        value: 3,
+      },
+      {
+        name: `${colorizeText('4.', 'yellow')} List pending tasks`,
+        value: 4,
+      },
+      {
+        name: `${colorizeText('5.', 'yellow')} Complete task(s)`,
+        value: 5,
+      },
+      {
+        name: `${colorizeText('6.', 'yellow')} Delete a task`,
+        value: 6,
+      },
+      {
+        name: `${colorizeText('0.', 'yellow')} Exit`,
+        value: 0,
+      },
+    ],
+  },
 ];
 
 /**
@@ -45,26 +45,26 @@ const menuOptions = [
  * @returns { Number } the selected option
  */
 const inquirerMenu = async () => {
-	console.clear();
+  console.clear();
 
-	//destructuracion, selected option es la property name de menuOptions
-	const { selectedOption } = await inquirer.prompt(menuOptions);
+  //destructuracion, selected option es la property name de menuOptions
+  const { selectedOption } = await inquirer.prompt(menuOptions);
 
-	return selectedOption;
+  return selectedOption;
 };
 
 /**
  * Stops program execution until the user presses ENTER.
  */
 const pauseMenu = async () => {
-	console.log('\n');
+  console.log('\n');
 
-	await inquirer.prompt([
-		{
-			name: 'pausing',
-			message: `Press ${colorizeText('ENTER', 'yellow')} to continue ...`,
-		},
-	]);
+  await inquirer.prompt([
+    {
+      name: 'pausing',
+      message: `Press ${colorizeText('ENTER', 'yellow')} to continue ...`,
+    },
+  ]);
 };
 
 /**
@@ -72,22 +72,22 @@ const pauseMenu = async () => {
  * @param { String } messageToShow to the user
  */
 const readUserInput = async (messageToShow) => {
-	const question = [
-		{
-			type: 'input',
-			name: 'userInput',
-			message: colorizeText(messageToShow, 'yellow') + '\n - ',
-			validate: function (input) {
-				if (input.length === 0) {
-					return `${colorizeText('Please enter a value', 'red')}`;
-				}
-				return true;
-			},
-		},
-	];
+  const question = [
+    {
+      type: 'input',
+      name: 'userInput',
+      message: colorizeText(messageToShow, 'yellow') + '\n - ',
+      validate: function (input) {
+        if (input.length === 0) {
+          return `${colorizeText('Please enter a value', 'red')}`;
+        }
+        return true;
+      },
+    },
+  ];
 
-	const { userInput } = await inquirer.prompt(question);
-	return userInput;
+  const { userInput } = await inquirer.prompt(question);
+  return userInput;
 };
 
 /**
@@ -95,35 +95,35 @@ const readUserInput = async (messageToShow) => {
  * @param { Array<> } tasksToShow the array of all the tasks, completed or not
  */
 const showListOfTasksToDelete = async (tasksToShow = []) => {
-	const choices = tasksToShow.map((eachTask, index) => {
-		//Destructuring each task
-		const { id, desc } = eachTask;
+  const choices = tasksToShow.map((eachTask, index) => {
+    //Destructuring each task
+    const { id, desc } = eachTask;
 
-		const indexi = colorizeText(`${index + 1}.`, 'yellow');
+    const indexi = colorizeText(`${index + 1}.`, 'yellow');
 
-		return {
-			value: id,
-			name: `${indexi} ${desc}`,
-		};
-	});
+    return {
+      value: id,
+      name: `${indexi} ${desc}`,
+    };
+  });
 
-	choices.unshift({
-		value: 0,
-		name: colorizeText('0 to cancel', 'yellow'),
-	});
+  choices.unshift({
+    value: 0,
+    name: colorizeText('0 to cancel', 'yellow'),
+  });
 
-	const question = [
-		{
-			type: 'list',
-			name: 'selectedTaskID',
-			message: 'Select tasks to delete',
-			choices,
-		},
-	];
+  const question = [
+    {
+      type: 'list',
+      name: 'selectedTaskID',
+      message: 'Select tasks to delete',
+      choices,
+    },
+  ];
 
-	const { selectedTaskID } = await inquirer.prompt(question);
+  const { selectedTaskID } = await inquirer.prompt(question);
 
-	return selectedTaskID;
+  return selectedTaskID;
 };
 
 /**
@@ -131,17 +131,17 @@ const showListOfTasksToDelete = async (tasksToShow = []) => {
  * @param { String } message confirmation message
  */
 const confirmMessage = async (message) => {
-	const question = [
-		{
-			type: 'confirm',
-			name: 'confirmation',
-			message,
-			default: true,
-		},
-	];
+  const question = [
+    {
+      type: 'confirm',
+      name: 'confirmation',
+      message,
+      default: true,
+    },
+  ];
 
-	const { confirmation } = await inquirer.prompt(question);
-	return confirmation;
+  const { confirmation } = await inquirer.prompt(question);
+  return confirmation;
 };
 
 /**
@@ -149,30 +149,29 @@ const confirmMessage = async (message) => {
  * @param { Array } pendingTasks
  */
 const showListOfPendingTasks = async (pendingTasks = []) => {
-	console.log();
-	const choices = pendingTasks.map((pendTask, index) => {
-		const { id, desc: description } = pendTask;
+  console.log();
+  const choices = pendingTasks.map((pendTask, index) => {
+    const { id, desc: description } = pendTask;
 
-		const indexi = colorizeText(`${index + 1}.`, 'yellow');
+    const indexi = colorizeText(`${index + 1}.`, 'yellow');
 
-		return {
-			value: id,
-			name: `${indexi} ${description}`,
-		};
-	});
+    return {
+      value: id,
+      name: `${indexi} ${description}`,
+    };
+  });
 
-	const questions = [
-		{
-			type: 'checkbox',
-			name: 'selectedTasks',
-			message: 'Select tasks to mark as complete',
-			choices,
-		},
-	];
+  const questions = [
+    {
+      type: 'checkbox',
+      name: 'selectedTasks',
+      message: 'Select tasks to mark as complete',
+      choices,
+    },
+  ];
 
-	const { selectedTasks } = await inquirer.prompt(questions);
-	return selectedTasks;
+  const { selectedTasks } = await inquirer.prompt(questions);
+  return selectedTasks;
 };
 
 export { confirmMessage, inquirerMenu, pauseMenu, readUserInput, showListOfPendingTasks, showListOfTasksToDelete };
-
