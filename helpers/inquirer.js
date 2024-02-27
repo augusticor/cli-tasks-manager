@@ -1,5 +1,5 @@
-const inquirer = require('inquirer');
-require('colors');
+import inquirer from 'inquirer';
+import colorizeText from './colors.js';
 
 const menuOptions = [
 	{
@@ -9,37 +9,41 @@ const menuOptions = [
 		message: 'Select an option',
 		choices: [
 			{
-				name: `${'1.'.yellow} Create a task`,
+				name: `${colorizeText('1.', 'yellow')} Create a task`,
 				value: 1,
 			},
 			{
-				name: `${'2.'.yellow} List all tasks`,
+				name: `${colorizeText('2.', 'yellow')} List all tasks`,
 				value: 2,
 			},
 			{
-				name: `${'3.'.yellow} List completed tasks`,
+				name: `${colorizeText('3.', 'yellow')} List completed tasks`,
 				value: 3,
 			},
 			{
-				name: `${'4.'.yellow} List pending tasks`,
+				name: `${colorizeText('4.', 'yellow')} List pending tasks`,
 				value: 4,
 			},
 			{
-				name: `${'5.'.yellow} Complete task(s)`,
+				name: `${colorizeText('5.', 'yellow')} Complete task(s)`,
 				value: 5,
 			},
 			{
-				name: `${'6.'.yellow} Delete a task`,
+				name: `${colorizeText('6.', 'yellow')} Delete a task`,
 				value: 6,
 			},
 			{
-				name: `${'0.'.yellow} Exit`,
+				name: `${colorizeText('0.', 'yellow')} Exit`,
 				value: 0,
 			},
 		],
 	},
 ];
 
+/**
+ * Shows the main menu to the user
+ * @returns { Number } the selected option
+ */
 const inquirerMenu = async () => {
 	console.clear();
 
@@ -58,7 +62,7 @@ const pauseMenu = async () => {
 	await inquirer.prompt([
 		{
 			name: 'pausing',
-			message: `Press ${'ENTER'.yellow} to continue ...`,
+			message: `Press ${colorizeText('ENTER', 'yellow')} to continue ...`,
 		},
 	]);
 };
@@ -72,10 +76,10 @@ const readUserInput = async (messageToShow) => {
 		{
 			type: 'input',
 			name: 'userInput',
-			message: messageToShow.yellow + '\n - ',
+			message: colorizeText(messageToShow, 'yellow') + '\n - ',
 			validate: function (input) {
 				if (input.length === 0) {
-					return `${'Please write a task description !!'.red}`;
+					return `${colorizeText('Please enter a value', 'red')}`;
 				}
 				return true;
 			},
@@ -88,14 +92,14 @@ const readUserInput = async (messageToShow) => {
 
 /**
  * Shows all the tasks as answers for the inquirier menu, to delete them
- * @param { Array } tasksToShow the array of all the tasks, completed or not
+ * @param { Array<> } tasksToShow the array of all the tasks, completed or not
  */
 const showListOfTasksToDelete = async (tasksToShow = []) => {
 	const choices = tasksToShow.map((eachTask, index) => {
 		//Destructuring each task
 		const { id, desc } = eachTask;
 
-		const indexi = `${index + 1}.`.yellow;
+		const indexi = colorizeText(`${index + 1}.`, 'yellow');
 
 		return {
 			value: id,
@@ -105,7 +109,7 @@ const showListOfTasksToDelete = async (tasksToShow = []) => {
 
 	choices.unshift({
 		value: 0,
-		name: '0 to cancel'.yellow,
+		name: colorizeText('0 to cancel', 'yellow'),
 	});
 
 	const question = [
@@ -149,7 +153,7 @@ const showListOfPendingTasks = async (pendingTasks = []) => {
 	const choices = pendingTasks.map((pendTask, index) => {
 		const { id, desc: description } = pendTask;
 
-		const indexi = `${index + 1}.`.yellow;
+		const indexi = colorizeText(`${index + 1}.`, 'yellow');
 
 		return {
 			value: id,
@@ -170,11 +174,5 @@ const showListOfPendingTasks = async (pendingTasks = []) => {
 	return selectedTasks;
 };
 
-module.exports = {
-	inquirerMenu,
-	pauseMenu,
-	readUserInput,
-	showListOfTasksToDelete,
-	confirmMessage,
-	showListOfPendingTasks,
-};
+export { confirmMessage, inquirerMenu, pauseMenu, readUserInput, showListOfPendingTasks, showListOfTasksToDelete };
+

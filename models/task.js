@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+import { randomUUID } from 'node:crypto';
 
 class Task {
 	id = '';
@@ -6,9 +6,9 @@ class Task {
 	achievedIn = null;
 
 	constructor(desc) {
-		this.id = uuidv4();
+		this.id = randomUUID();
 		this.desc = desc;
 	}
 }
 
-module.exports = Task;
+export default Task;

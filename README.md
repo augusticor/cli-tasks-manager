@@ -1,4 +1,4 @@
-# cli-tasks-manager
+# cli-tasks-manager 📝
 
 Terminal "to do" app using inquirer library and NodeJS
 
@@ -17,26 +17,18 @@ Implemented CRUD functions :
 
 ## Usage
 
-Clone the repository
+1. Clone the repository
 
-```
-git clone https://github.com/augusticor/cli-tasks-manager.git
-```
+    ```
+    git clone https://github.com/augusticor/cli-tasks-manager.git
+    ```
 
-Open the project folder on your cli
+2. Open the project folder in your terminal
 
-Install all the dependencies
+3. Install all the dependencies using `npm install`
 
-```
-npm install
+Lists of dependencies:
 
-"colors": "^1.4.0"
-"inquirer": "^7.3.3",
-"uuid": "^8.3.2"
-```
+- **inquirer**: 9.2.15
 
-Run [app.js](app.js) main file by running
-
-```
-node app.js
-```
+4. Run [app.js](app.js) main file by running `npm start` command in a terminal.

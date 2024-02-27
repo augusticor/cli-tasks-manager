@@ -1,50 +1,47 @@
-const { readlink } = require('fs');
+import readline from 'node:readline';
+import colorizeText from './colors.js';
 
-require('colors');
-
-const showMenu = () => {
+export const showMenu = () => {
 	return new Promise((resolve) => {
 		console.clear();
 
-		console.log('=========================='.yellow);
-		console.log('  Select an option'.magenta);
-		console.log('==========================\n'.yellow);
-		console.log(`${'1.'.green} Create a task`);
-		console.log(`${'2.'.green} List all tasks`);
-		console.log(`${'3.'.green} List completed tasks`);
-		console.log(`${'4.'.green} List pending tasks`);
-		console.log(`${'5.'.green} Complete task(s)`);
-		console.log(`${'6.'.green} Delete task(s)`);
-		console.log(`${'0.'.green} Exit \n`);
-		console.log('==========================\n'.yellow);
+		console.log(colorizeText('==========================', 'yellow'));
+		console.log(colorizeText('   Select an option', 'yellow'));
+		console.log(colorizeText('==========================', 'yellow'));
+		console.log(`${colorizeText('1.', 'green')} Create a task`);
+		console.log(`${colorizeText('2.', 'green')} List all tasks`);
+		console.log(`${colorizeText('3.', 'green')} List completed tasks`);
+		console.log(`${colorizeText('4.', 'green')} List pending tasks`);
+		console.log(`${colorizeText('5.', 'green')} Complete task(s)`);
+		console.log(`${colorizeText('6.', 'green')} Delete task(s)`);
+		console.log(`${colorizeText('0.', 'green')} Exit \n`);
+		console.log(colorizeText('==========================', 'yellow'));
 
-		const readLine = require('readline').createInterface({
+		const IreadLine = readline.createInterface({
 			input: process.stdin,
 			output: process.stdout,
 		});
 
-		readLine.question('Select an option  ', (answer) => {
+		IreadLine.question('Select an option  ', (answer) => {
 			resolve(answer);
-			readLine.close();
+			IreadLine.close();
 		});
 	});
 };
 
-const pause = () => {
+export const pause = () => {
 	return new Promise((resolve) => {
-		const readLine = require('readline').createInterface({
+		const IreadLine = readline.createInterface({
 			input: process.stdin,
 			output: process.stdout,
 		});
 
-		readLine.question(`Press ${'ENTER'.yellow} to continue ...`, (answer) => {
-			readLine.close();
-			resolve();
-		});
+		IreadLine.question(`Press ${colorizeText('ENTER', 'yellow')} to continue ...`,
+			() => {
+				IreadLine.close();
+				resolve();
+			});
 	});
 };
 
-module.exports = {
-	showMenu,
-	pause,
-};
+

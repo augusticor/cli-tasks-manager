@@ -1,17 +1,17 @@
-const fs = require('fs');
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 const filePath = './persistence/tasks.json';
 
 const saveOnFile = (data) => {
-	fs.writeFileSync(filePath, JSON.stringify(data));
+	writeFileSync(filePath, JSON.stringify(data));
 };
 
 const readFromFile = () => {
-	if (!fs.existsSync(filePath)) {
+	if (!existsSync(filePath)) {
 		return null;
 	}
 
-	const stringInfo = fs.readFileSync(filePath, { encoding: 'utf-8' });
+	const stringInfo = readFileSync(filePath, { encoding: 'utf-8' });
 
 	const data = JSON.parse(stringInfo);
 
@@ -25,7 +25,6 @@ const readFromFile = () => {
 	return data;
 };
 
-module.exports = {
-	saveOnFile,
-	readFromFile,
-};
+
+
+export { readFromFile, saveOnFile };

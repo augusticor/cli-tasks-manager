@@ -1,4 +1,5 @@
-const Task = require('./task');
+import colorizeText from '../helpers/colors.js';
+import Task from './task.js';
 
 class TaskManager {
 	constructor() {
@@ -28,8 +29,8 @@ class TaskManager {
 		for (let i = 0; i < taskListOnArrayMode.length; i++) {
 			const eachTask = this._list[taskListOnArrayMode[i]];
 
-			isAchievedYet = eachTask.achievedIn !== null ? 'Complete'.green : 'Incomplete'.red;
-			console.log(`${`${i}.`.yellow} ${eachTask.desc} \t ${isAchievedYet}\n`);
+			isAchievedYet = eachTask.achievedIn!== null ? colorizeText('Complete', 'green') : colorizeText('Incomplete', 'red');
+			console.log(`${colorizeText(i, 'yellow')} ${eachTask.desc} \t ${isAchievedYet}\n`);
 		}
 	}
 
@@ -39,10 +40,9 @@ class TaskManager {
 	printStylizedTasks2() {
 		console.log();
 		this.getListOfAllTasks.forEach((task, i) => {
-			const taskIndex = `${i + 1}.`.yellow;
+			const taskIndex = colorizeText(`${i + 1}.`, 'yellow');
 			const { desc, achievedIn } = task;
-
-			const taskStatus = achievedIn ? 'Complete'.green : 'Incomplete'.red;
+			const taskStatus = achievedIn ? colorizeText('Complete', 'green') : colorizeText('Incomplete', 'red');
 
 			console.log(`${taskIndex} ${desc} \t ${taskStatus}`);
 		});
@@ -56,7 +56,7 @@ class TaskManager {
 	}
 
 	/**
-	 * Creates the tasks that were on persistence on memory
+	 * Creates the tasks from the file on persistence
 	 * @param { Array } tasks of tasks objects from @class { Task }
 	 */
 	loadTasksFromArray(tasks) {
@@ -125,10 +125,10 @@ class TaskManager {
 	printArrayOfTasks(arrayOfTasks) {
 		console.log();
 		arrayOfTasks.forEach((task, i) => {
-			const taskIndex = `${i + 1}.`.yellow;
+			const taskIndex = colorizeText(`${i + 1}.`, 'yellow');
 			const { desc, achievedIn } = task;
 
-			const taskStatus = achievedIn ? `Completed on ${this.getDateWithFormat(task.achievedIn)}`.green : 'Incomplete'.red;
+			const taskStatus = achievedIn ? colorizeText(`Completed on ${this.getDateWithFormat(task.achievedIn)}`, 'green') : colorizeText('Incomplete', 'red');
 
 			console.log(`${taskIndex} ${desc} \t ${taskStatus}`);
 		});
@@ -151,4 +151,4 @@ class TaskManager {
 	}
 }
 
-module.exports = TaskManager;
+export default TaskManager;

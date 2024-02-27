@@ -1,10 +1,6 @@
-//Recomendado importar primero las importaciones de terceros
-require('colors');
-
-const { inquirerMenu, pauseMenu, readUserInput, showListOfTasksToDelete, confirmMessage, showListOfPendingTasks } = require('./helpers/inquirer');
-const Task = require('./models/task');
-const TaskManager = require('./models/task-manager');
-const { saveOnFile, readFromFile } = require('./persistence/persistence');
+import { confirmMessage, inquirerMenu, pauseMenu, readUserInput, showListOfPendingTasks, showListOfTasksToDelete } from './helpers/inquirer.js';
+import TaskManager from './models/task-manager.js';
+import { readFromFile, saveOnFile } from './persistence/persistence.js';
 
 console.clear();
 
